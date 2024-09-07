@@ -4,7 +4,7 @@ import SearchTodo from '../components/SearchTodo';
 import { getTodos } from '../lib/todoService';
 
 export default async function Home() {
-  const { todos } = await getTodos(); // Server-side data fetching
+  const { todos } = await getTodos(); 
 
   return (
     <div>
