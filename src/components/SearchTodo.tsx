@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
+import { Link } from 'next/link'
 
 export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
   const [searchTerm, setSearchTerm] = useState('');
