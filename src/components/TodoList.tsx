@@ -7,7 +7,7 @@ export default function TodoList({ todos }: { todos: any[] }) {
       {todos.map((todo) => (
         <div
           key={todo.id}
-          className="p-4 bg-secondary rounded flex justify-between items-center"
+          className="p-4 bg-secondary rounded-md flex justify-between items-center"
         >
           <Link href={`/todos/${todo.id}`} className="text-lg font-medium">
             {todo.todo}
