@@ -20,7 +20,7 @@ export default function CreateTodo({ onAddTodo }: { onAddTodo: (todo: any) => vo
       
       if (res.ok) {
         const addedTodo = await res.json();
-        onAddTodo(addedTodo);  // Call the passed function to update the todo list
+        onAddTodo(addedTodo); 
       }
     }
   }
