@@ -24,11 +24,13 @@ export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
         className="mb-4"
       />
       <div className="space-y-4">
+{searchTerm? ({initialTodos.map((Todo) => (
+<div key={todo.id}> {todo.todo}</div> ): (
         {filteredTodos.map((todo) => (
           <div key={todo.id} className="p-4 bg-secondary rounded-md">
             {todo.todo}
           </div>
-        ))}
+        ))} )
       </div>
     </div>
   );
