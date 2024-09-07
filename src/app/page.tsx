@@ -7,7 +7,7 @@ import SearchTodo from '../components/SearchTodo';
 import { getTodos } from '../lib/todoService';
 
 export default function Home() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   
   useEffect(() => {
     async function fetchTodos() {
