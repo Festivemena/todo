@@ -5,18 +5,23 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useTransition } from 'react';
 
-export default function CreateTodo() {
+export default function CreateTodo({ onAddTodo }: { onAddTodo: (todo: any) => void }) {
   const [todo, setTodo] = useState('');
   const [isPending, startTransition] = useTransition();
 
   async function addTodoAction(formData: FormData) {
-    const todo = formData.get('todo')?.toString() || '';
-    if (todo.trim()) {
-      await fetch('/api/todos', {
+    const newTodo = formData.get('todo')?.toString() || '';
+    if (newTodo.trim()) {
+      const res = await fetch('/api/todos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ todo }),
+        body: JSON.stringify({ todo: newTodo }),
       });
+      
+      if (res.ok) {
+        const addedTodo = await res.json();
+        onAddTodo(addedTodo);  // Call the passed function to update the todo list
+      }
     }
   }
 
