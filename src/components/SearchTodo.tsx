@@ -6,15 +6,29 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(() => {
+    // Initialize the state from localStorage if it exists
+    if (typeof window !== "undefined") {
+      return localStorage.getItem('searchTerm') || '';
+    }
+    return '';
+  });
   const [filteredTodos, setFilteredTodos] = useState(initialTodos);
 
   useEffect(() => {
+    // Filter todos based on searchTerm
     const filtered = initialTodos.filter((todo) => {
       return todo?.todo?.toLowerCase().includes(searchTerm.toLowerCase());
     });
     setFilteredTodos(filtered);
   }, [searchTerm, initialTodos]);
+
+  useEffect(() => {
+    // Save searchTerm to localStorage whenever it changes
+    if (typeof window !== "undefined") {
+      localStorage.setItem('searchTerm', searchTerm);
+    }
+  }, [searchTerm]);
 
   return (
     <div>
