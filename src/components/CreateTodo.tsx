@@ -27,7 +27,7 @@ export default function CreateTodo() {
         e.preventDefault();
         startTransition(() => addTodoAction(new FormData(e.currentTarget)));
       }}
-      className="flex space-x-4 mb-4"
+      className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4"
     >
       <Textarea
         name="todo"
@@ -40,6 +40,7 @@ export default function CreateTodo() {
         type="submit"
         variant="default"
         disabled={isPending}
+        className='w-full md:w-auto'
       >
         {isPending ? 'Adding...' : 'Add'}
       </Button>

@@ -15,7 +15,7 @@ export default function TodoList({ todos }: { todos: any[] }) {
           <form method="post" action={`/api/todos`} className="ml-4">
             <Button
               type="submit"
-              formAction={`https://dummyjson.com/todos/${todo.id}/delete`}
+              formAction={`/api/todos/${todo.id}/delete`}
               variant="destructive"
             >
               Delete
