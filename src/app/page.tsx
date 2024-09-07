@@ -10,7 +10,7 @@ export default async function Home() {
     <div>
       <CreateTodo />
       <SearchTodo initialTodos={todos} />
-      <TodoList todos={todos} />
+      
     </div>
   );
 }
