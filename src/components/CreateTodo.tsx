@@ -1,4 +1,4 @@
-'use client'; // Required for client-side actions
+'use client'; 
 
 import { useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
