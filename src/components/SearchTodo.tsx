@@ -25,7 +25,7 @@ export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
       />
       <div className="space-y-4">
         {filteredTodos.map((todo) => (
-          <div key={todo.id} className="p-4 bg-secondary rounded">
+          <div key={todo.id} className="p-4 bg-secondary rounded-md">
             {todo.todo}
           </div>
         ))}
