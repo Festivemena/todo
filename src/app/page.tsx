@@ -6,6 +6,11 @@ import CreateTodo from '../components/CreateTodo';
 import SearchTodo from '../components/SearchTodo';
 import { getTodos } from '../lib/todoService';
 
+type Todo= {
+id : number;
+todo : string;
+}
+
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
   
