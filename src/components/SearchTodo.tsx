@@ -1,7 +1,7 @@
 'use client'; // Client-side search
 
 import { useState, useEffect } from 'react';
-import { Input } from '@components/ui/input';
+import { Input } from '@/components/ui/input';
 
 export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
   const [searchTerm, setSearchTerm] = useState('');
