@@ -1,4 +1,4 @@
-'use client'; // Client-side search
+'use client';
 
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
   const [searchTerm, setSearchTerm] = useState(() => {
-    // Initialize the state from localStorage if it exists
     if (typeof window !== "undefined") {
       return localStorage.getItem('searchTerm') || '';
     }
@@ -16,7 +15,6 @@ export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
   const [filteredTodos, setFilteredTodos] = useState(initialTodos);
 
   useEffect(() => {
-    // Filter todos based on searchTerm
     const filtered = initialTodos.filter((todo) => {
       return todo?.todo?.toLowerCase().includes(searchTerm.toLowerCase());
     });
@@ -24,11 +22,27 @@ export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
   }, [searchTerm, initialTodos]);
 
   useEffect(() => {
-    // Save searchTerm to localStorage whenever it changes
     if (typeof window !== "undefined") {
       localStorage.setItem('searchTerm', searchTerm);
     }
   }, [searchTerm]);
+
+  
+  const handleDelete = async (id: number) => {
+    const res = await fetch(`/api/todos`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    if (res.ok) {
+      setFilteredTodos(filteredTodos.filter(todo => todo.id !== id));
+    } else {
+      console.error('Failed to delete the todo');
+    }
+  };
 
   return (
     <div>
@@ -49,15 +63,13 @@ export default function SearchTodo({ initialTodos }: { initialTodos: any[] }) {
             <Link href={`/todos/${todo.id}`} className="text-lg font-medium">
               {todo.todo}
             </Link>
-            <form method="post" action={`/api/todos`} className="ml-4">
-              <Button
-                type="submit"
-                formAction={`/api/todos/${todo.id}/delete`}
-                variant="destructive"
-              >
-                Delete
-              </Button>
-            </form>
+            <Button
+              onClick={() => handleDelete(todo.id)}
+              variant="destructive"
+              className="ml-4"
+            >
+              Delete
+            </Button>
           </div>
         ))}
       </div>
